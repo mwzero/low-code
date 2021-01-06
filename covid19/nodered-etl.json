@@ -1,1 +1,848 @@
-[{"id":"dfde19ff.b06078","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"89d7b498.8148d8","type":"subflow","name":"SQL Command","info":"Send a SQL command to MySQL using a semaphore.","category":"database","in":[{"x":40,"y":120,"wires":[{"id":"cc5f77d8.4a09d8"}]}],"out":[{"x":640,"y":80,"wires":[{"id":"240cff16.f791b","port":0}]},{"x":640,"y":20,"wires":[{"id":"a2cfa126.d92cb","port":0}]}],"env":[],"color":"#DDAA99"},{"id":"ee1cddc2.2ecec","type":"subflow","name":"SQL Command (2)","info":"Send a SQL command to MySQL using a semaphore.","category":"database","in":[{"x":40,"y":120,"wires":[]}],"out":[{"x":640,"y":80,"wires":[]}],"env":[],"color":"#DDAA99"},{"id":"694282b6.14ee7c","type":"subflow","name":"SQL Command (3)","info":"Send a SQL command to MySQL using a semaphore.","category":"database","in":[{"x":40,"y":120,"wires":[{"id":"a4ff7067.44f38"}]}],"out":[{"x":640,"y":80,"wires":[{"id":"933f3ce7.fb5f","port":0}]}],"env":[],"color":"#DDAA99"},{"id":"429ab68b.fa8cb8","type":"http proxy","z":"","name":"Crif","url":"http://10.254.124.172:8080","noproxy":[]},{"id":"604743f8.d636fc","type":"MySQLdatabase","z":"","name":"","host":"10.254.121.75","port":"3306","db":"covid","tz":"","charset":"UTF8"},{"id":"6ba9db2d.dec0c4","type":"MySQLdatabase","z":"","name":"","host":"fs","port":"3306","db":"cheznous","tz":""},{"id":"d38cb13e.ede5a","type":"semaphore-config","z":"","name":"database semaphore","capacity":"1"},{"id":"440773f8.08cb7c","type":"MySQLdatabase","z":"","name":"","host":"fs","port":"3306","db":"cheznous","tz":""},{"id":"4de866ce.0c3fb8","type":"MySQLdatabase","z":"","host":"127.0.0.1","port":"3306","db":"nodered","tz":""},{"id":"7945ea73.c5d424","type":"ui_tab","z":"","name":"Home","icon":"dashboard","disabled":false,"hidden":false},{"id":"7adf4b73.256794","type":"ui_base","theme":{"name":"theme-light","lightTheme":{"default":"#0094CE","baseColor":"#0094CE","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":true,"reset":false},"darkTheme":{"default":"#097479","baseColor":"#097479","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":false},"customTheme":{"name":"Untitled Theme 1","default":"#4B7930","baseColor":"#4B7930","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"},"themeState":{"base-color":{"default":"#0094CE","value":"#0094CE","edited":false},"page-titlebar-backgroundColor":{"value":"#0094CE","edited":false},"page-backgroundColor":{"value":"#fafafa","edited":false},"page-sidebar-backgroundColor":{"value":"#ffffff","edited":false},"group-textColor":{"value":"#1bbfff","edited":false},"group-borderColor":{"value":"#ffffff","edited":false},"group-backgroundColor":{"value":"#ffffff","edited":false},"widget-textColor":{"value":"#111111","edited":false},"widget-backgroundColor":{"value":"#0094ce","edited":false},"widget-borderColor":{"value":"#ffffff","edited":false},"base-font":{"value":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"}},"angularTheme":{"primary":"indigo","accents":"blue","warn":"red","background":"grey"}},"site":{"name":"Node-RED Dashboard","hideToolbar":"false","allowSwipe":"false","lockMenu":"false","allowTempTheme":"true","dateFormat":"DD/MM/YYYY","sizes":{"sx":48,"sy":48,"gx":6,"gy":6,"cx":6,"cy":6,"px":0,"py":0}}},{"id":"97bc1f7.86f0be","type":"ui_group","z":"","name":"Default","tab":"7945ea73.c5d424","order":1,"disp":true,"width":"6","collapse":false},{"id":"4fdf7c1d.563ff4","type":"ui_group","z":"","name":"GAUGE INPUT SELECTOR","tab":"f5b1eb7.236e318","order":1,"disp":true,"width":8,"collapse":false},{"id":"f5b1eb7.236e318","type":"ui_tab","z":"","name":"Controls","icon":"dashboard","disabled":false,"hidden":false},{"id":"80866bca.84dc68","type":"http response","z":"dfde19ff.b06078","name":"","statusCode":"200","headers":{},"x":900,"y":60,"wires":[]},{"id":"8d44e762.8d3138","type":"http request","z":"dfde19ff.b06078","name":"","method":"GET","ret":"txt","paytoqs":false,"url":"https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv","tls":"","persist":false,"proxy":"429ab68b.fa8cb8","authType":"","x":290,"y":260,"wires":[["d2195dfd.f237e","c280613d.f8f56"]]},{"id":"d2195dfd.f237e","type":"csv","z":"dfde19ff.b06078","name":"CSV1","sep":",","hdrin":true,"hdrout":"","multi":"mult","ret":"\\n","temp":"","skip":"0","strings":true,"x":270,"y":340,"wires":[["8dde44f2.e6b398"]]},{"id":"a2cfa126.d92cb","type":"catch","z":"89d7b498.8148d8","name":"","scope":null,"uncaught":true,"x":300,"y":40,"wires":[[]]},{"id":"83e983d0.686c9","type":"mysql","z":"dfde19ff.b06078","mydb":"604743f8.d636fc","name":"covid","x":1290,"y":400,"wires":[["4b10f388.d3057c","d74f3622.c00608"]]},{"id":"a3b2c0b6.e01b5","type":"mysql","z":"ee1cddc2.2ecec","mydb":"6ba9db2d.dec0c4","name":"database","x":320,"y":120,"wires":[[]]},{"id":"74c8370f.6ec698","type":"catch","z":"ee1cddc2.2ecec","name":"","scope":null,"uncaught":true,"x":300,"y":40,"wires":[[]]},{"id":"a4ff7067.44f38","type":"semaphore-take","z":"694282b6.14ee7c","config":"d38cb13e.ede5a","name":"","x":160,"y":120,"wires":[["c75f57e1.76a1e8"]]},{"id":"933f3ce7.fb5f","type":"semaphore-leave","z":"694282b6.14ee7c","config":"d38cb13e.ede5a","name":"","x":510,"y":80,"wires":[[]]},{"id":"c75f57e1.76a1e8","type":"mysql","z":"694282b6.14ee7c","mydb":"440773f8.08cb7c","name":"database","x":320,"y":120,"wires":[["933f3ce7.fb5f"]]},{"id":"82e125ad.7fe828","type":"catch","z":"694282b6.14ee7c","name":"","scope":null,"uncaught":true,"x":300,"y":40,"wires":[["933f3ce7.fb5f"]]},{"id":"cd73df45.332a5","type":"template","z":"dfde19ff.b06078","name":"insert into covid","field":"topic","fieldType":"msg","format":"handlebars","syntax":"mustache","template":"INSERT INTO covid.dati (data,\nricoverati_con_sintomi,\nterapia_intensiva,\ntotale_ospedalizzati,\nisolamento_domiciliare,\ntotale_positivi,\nvariazione_totale_positivi,\nnuovi_positivi,\ndimessi_guariti,\ndeceduti,\ntotale_casi,\ntamponi\n)\nVALUES (\n    \"{{payload.data}}\",\n    {{payload.ricoverati_con_sintomi}},\n    {{payload.terapia_intensiva}},\n    {{payload.totale_ospedalizzati}},\n    {{payload.isolamento_domiciliare}},\n    {{payload.totale_positivi}},\n    {{payload.variazione_totale_positivi}},\n    {{payload.nuovi_positivi}},\n    {{payload.dimessi_guariti}},\n    {{payload.deceduti}},\n    {{payload.totale_casi}},\n    {{payload.tamponi}}\n);","output":"str","x":1280,"y":280,"wires":[["83e983d0.686c9","a0be3e87.4329e"]]},{"id":"19dc1eb3.4e09b1","type":"array-loop","z":"dfde19ff.b06078","name":"Array","key":"al19dc1eb34e09b1","keyType":"msg","reset":false,"resetValue":"value-null","array":"pippo","arrayType":"msg","x":550,"y":420,"wires":[["80866bca.84dc68"],["cdadc96b.153778"]]},{"id":"8dde44f2.e6b398","type":"function","z":"dfde19ff.b06078","name":"","func":"msg.pippo = msg.payload\nreturn msg;","outputs":1,"noerr":0,"x":270,"y":420,"wires":[["19dc1eb3.4e09b1"]]},{"id":"ad8d1187.a9d19","type":"inject","z":"dfde19ff.b06078","name":"","topic":"","payload":"","payloadType":"date","repeat":"86400","crontab":"","once":false,"onceDelay":0.1,"x":170,"y":80,"wires":[["8d44e762.8d3138"]]},{"id":"9e7a6fef.343e3","type":"http in","z":"dfde19ff.b06078","name":"testOne","url":"importCovid","method":"get","upload":false,"swaggerDoc":"","x":130,"y":140,"wires":[["8d44e762.8d3138"]]},{"id":"6a448369.59ec1c","type":"subflow:89d7b498.8148d8","z":"dfde19ff.b06078","name":"Verify Row Exists","env":[],"x":750,"y":580,"wires":[["405b6c27.7c3a34","71a77512.bafb3c"],["4b10f388.d3057c"]]},{"id":"cc5f77d8.4a09d8","type":"template","z":"89d7b498.8148d8","name":"","field":"topic","fieldType":"msg","format":"handlebars","syntax":"mustache","template":"select count(*) as nrRecord from dati where data  = \"{{payload.data}}\"","output":"str","x":200,"y":220,"wires":[["240cff16.f791b"]]},{"id":"240cff16.f791b","type":"mysql","z":"89d7b498.8148d8","mydb":"604743f8.d636fc","name":"","x":370,"y":280,"wires":[["4f43996d.9476d8"]]},{"id":"4f43996d.9476d8","type":"debug","z":"89d7b498.8148d8","d":true,"name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":700,"y":180,"wires":[]},{"id":"cdadc96b.153778","type":"function","z":"dfde19ff.b06078","name":"Salva Payload","func":"msg.bck1=msg.payload\nreturn msg;","outputs":1,"noerr":0,"x":740,"y":660,"wires":[["6a448369.59ec1c","6fce0a32.7aefe4"]]},{"id":"7085aa6e.8eb564","type":"function","z":"dfde19ff.b06078","name":"Recovery payload","func":"msg.payload = msg.bck1\nreturn msg;","outputs":1,"noerr":0,"x":1030,"y":340,"wires":[["cd73df45.332a5","f846cc6e.3fdf1"]]},{"id":"3ea067fc.f18128","type":"catch","z":"dfde19ff.b06078","name":"","scope":null,"uncaught":false,"x":700,"y":60,"wires":[["26f2a2af.a3f6ce"]]},{"id":"26f2a2af.a3f6ce","type":"http response","z":"dfde19ff.b06078","name":"","statusCode":"500","headers":{},"x":900,"y":20,"wires":[]},{"id":"405b6c27.7c3a34","type":"switch","z":"dfde19ff.b06078","name":"","property":"payload[0].nrRecord","propertyType":"msg","rules":[{"t":"eq","v":"0","vt":"num"},{"t":"gt","v":"0","vt":"num"}],"checkall":"false","repair":false,"outputs":2,"x":970,"y":520,"wires":[["7085aa6e.8eb564"],["4b10f388.d3057c"]]},{"id":"4b10f388.d3057c","type":"link out","z":"dfde19ff.b06078","name":"Next Record","links":["69bf8371.e9380c"],"x":1115,"y":600,"wires":[]},{"id":"69bf8371.e9380c","type":"link in","z":"dfde19ff.b06078","name":"","links":["4b10f388.d3057c"],"x":515,"y":520,"wires":[["19dc1eb3.4e09b1"]]},{"id":"c280613d.f8f56","type":"debug","z":"dfde19ff.b06078","d":true,"name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":480,"y":180,"wires":[]},{"id":"6fce0a32.7aefe4","type":"debug","z":"dfde19ff.b06078","d":true,"name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":840,"y":760,"wires":[]},{"id":"71a77512.bafb3c","type":"debug","z":"dfde19ff.b06078","d":true,"name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":770,"y":440,"wires":[]},{"id":"a0be3e87.4329e","type":"debug","z":"dfde19ff.b06078","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":1330,"y":200,"wires":[]},{"id":"f846cc6e.3fdf1","type":"debug","z":"dfde19ff.b06078","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":1050,"y":200,"wires":[]},{"id":"d74f3622.c00608","type":"debug","z":"dfde19ff.b06078","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":1330,"y":580,"wires":[]}]
+[
+    {
+        "id": "dfde19ff.b06078",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "89d7b498.8148d8",
+        "type": "subflow",
+        "name": "SQL Command",
+        "info": "Send a SQL command to MySQL using a semaphore.",
+        "category": "database",
+        "in": [
+            {
+                "x": 40,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "cc5f77d8.4a09d8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "240cff16.f791b",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 640,
+                "y": 20,
+                "wires": [
+                    {
+                        "id": "a2cfa126.d92cb",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ee1cddc2.2ecec",
+        "type": "subflow",
+        "name": "SQL Command (2)",
+        "info": "Send a SQL command to MySQL using a semaphore.",
+        "category": "database",
+        "in": [
+            {
+                "x": 40,
+                "y": 120,
+                "wires": []
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": []
+            }
+        ],
+        "env": [],
+        "color": "#DDAA99"
+    },
+    {
+        "id": "694282b6.14ee7c",
+        "type": "subflow",
+        "name": "SQL Command (3)",
+        "info": "Send a SQL command to MySQL using a semaphore.",
+        "category": "database",
+        "in": [
+            {
+                "x": 40,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "a4ff7067.44f38"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "933f3ce7.fb5f",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#DDAA99"
+    },
+    {
+        "id": "604743f8.d636fc",
+        "type": "MySQLdatabase",
+        "z": "",
+        "name": "",
+        "host": "10.254.121.75",
+        "port": "3306",
+        "db": "covid",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "6ba9db2d.dec0c4",
+        "type": "MySQLdatabase",
+        "z": "",
+        "name": "",
+        "host": "fs",
+        "port": "3306",
+        "db": "cheznous",
+        "tz": ""
+    },
+    {
+        "id": "d38cb13e.ede5a",
+        "type": "semaphore-config",
+        "z": "",
+        "name": "database semaphore",
+        "capacity": "1"
+    },
+    {
+        "id": "440773f8.08cb7c",
+        "type": "MySQLdatabase",
+        "z": "",
+        "name": "",
+        "host": "fs",
+        "port": "3306",
+        "db": "cheznous",
+        "tz": ""
+    },
+    {
+        "id": "4de866ce.0c3fb8",
+        "type": "MySQLdatabase",
+        "z": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "nodered",
+        "tz": ""
+    },
+    {
+        "id": "7945ea73.c5d424",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7adf4b73.256794",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "97bc1f7.86f0be",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "7945ea73.c5d424",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "4fdf7c1d.563ff4",
+        "type": "ui_group",
+        "z": "",
+        "name": "GAUGE INPUT SELECTOR",
+        "tab": "f5b1eb7.236e318",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "f5b1eb7.236e318",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Controls",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "80866bca.84dc68",
+        "type": "http response",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 900,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8d44e762.8d3138",
+        "type": "http request",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "d2195dfd.f237e",
+                "c280613d.f8f56"
+            ]
+        ]
+    },
+    {
+        "id": "d2195dfd.f237e",
+        "type": "csv",
+        "z": "dfde19ff.b06078",
+        "name": "CSV1",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "8dde44f2.e6b398"
+            ]
+        ]
+    },
+    {
+        "id": "a2cfa126.d92cb",
+        "type": "catch",
+        "z": "89d7b498.8148d8",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 300,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83e983d0.686c9",
+        "type": "mysql",
+        "z": "dfde19ff.b06078",
+        "mydb": "604743f8.d636fc",
+        "name": "covid",
+        "x": 1290,
+        "y": 400,
+        "wires": [
+            [
+                "4b10f388.d3057c",
+                "d74f3622.c00608"
+            ]
+        ]
+    },
+    {
+        "id": "a3b2c0b6.e01b5",
+        "type": "mysql",
+        "z": "ee1cddc2.2ecec",
+        "mydb": "6ba9db2d.dec0c4",
+        "name": "database",
+        "x": 320,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74c8370f.6ec698",
+        "type": "catch",
+        "z": "ee1cddc2.2ecec",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 300,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4ff7067.44f38",
+        "type": "semaphore-take",
+        "z": "694282b6.14ee7c",
+        "config": "d38cb13e.ede5a",
+        "name": "",
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "c75f57e1.76a1e8"
+            ]
+        ]
+    },
+    {
+        "id": "933f3ce7.fb5f",
+        "type": "semaphore-leave",
+        "z": "694282b6.14ee7c",
+        "config": "d38cb13e.ede5a",
+        "name": "",
+        "x": 510,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c75f57e1.76a1e8",
+        "type": "mysql",
+        "z": "694282b6.14ee7c",
+        "mydb": "440773f8.08cb7c",
+        "name": "database",
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "933f3ce7.fb5f"
+            ]
+        ]
+    },
+    {
+        "id": "82e125ad.7fe828",
+        "type": "catch",
+        "z": "694282b6.14ee7c",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 300,
+        "y": 40,
+        "wires": [
+            [
+                "933f3ce7.fb5f"
+            ]
+        ]
+    },
+    {
+        "id": "cd73df45.332a5",
+        "type": "template",
+        "z": "dfde19ff.b06078",
+        "name": "insert into covid",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO covid.dati (data,\nricoverati_con_sintomi,\nterapia_intensiva,\ntotale_ospedalizzati,\nisolamento_domiciliare,\ntotale_positivi,\nvariazione_totale_positivi,\nnuovi_positivi,\ndimessi_guariti,\ndeceduti,\ntotale_casi,\ntamponi\n)\nVALUES (\n    \"{{payload.data}}\",\n    {{payload.ricoverati_con_sintomi}},\n    {{payload.terapia_intensiva}},\n    {{payload.totale_ospedalizzati}},\n    {{payload.isolamento_domiciliare}},\n    {{payload.totale_positivi}},\n    {{payload.variazione_totale_positivi}},\n    {{payload.nuovi_positivi}},\n    {{payload.dimessi_guariti}},\n    {{payload.deceduti}},\n    {{payload.totale_casi}},\n    {{payload.tamponi}}\n);",
+        "output": "str",
+        "x": 1280,
+        "y": 280,
+        "wires": [
+            [
+                "83e983d0.686c9",
+                "a0be3e87.4329e"
+            ]
+        ]
+    },
+    {
+        "id": "19dc1eb3.4e09b1",
+        "type": "array-loop",
+        "z": "dfde19ff.b06078",
+        "name": "Array",
+        "key": "al19dc1eb34e09b1",
+        "keyType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "array": "pippo",
+        "arrayType": "msg",
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "80866bca.84dc68"
+            ],
+            [
+                "cdadc96b.153778"
+            ]
+        ]
+    },
+    {
+        "id": "8dde44f2.e6b398",
+        "type": "function",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "func": "msg.pippo = msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 420,
+        "wires": [
+            [
+                "19dc1eb3.4e09b1"
+            ]
+        ]
+    },
+    {
+        "id": "9e7a6fef.343e3",
+        "type": "http in",
+        "z": "dfde19ff.b06078",
+        "name": "testOne",
+        "url": "importCovid",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "8d44e762.8d3138"
+            ]
+        ]
+    },
+    {
+        "id": "6a448369.59ec1c",
+        "type": "subflow:89d7b498.8148d8",
+        "z": "dfde19ff.b06078",
+        "name": "Verify Row Exists",
+        "env": [],
+        "x": 750,
+        "y": 580,
+        "wires": [
+            [
+                "405b6c27.7c3a34",
+                "71a77512.bafb3c"
+            ],
+            [
+                "4b10f388.d3057c"
+            ]
+        ]
+    },
+    {
+        "id": "cc5f77d8.4a09d8",
+        "type": "template",
+        "z": "89d7b498.8148d8",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "select count(*) as nrRecord from dati where data  = \"{{payload.data}}\"",
+        "output": "str",
+        "x": 200,
+        "y": 220,
+        "wires": [
+            [
+                "240cff16.f791b"
+            ]
+        ]
+    },
+    {
+        "id": "240cff16.f791b",
+        "type": "mysql",
+        "z": "89d7b498.8148d8",
+        "mydb": "604743f8.d636fc",
+        "name": "",
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "4f43996d.9476d8"
+            ]
+        ]
+    },
+    {
+        "id": "4f43996d.9476d8",
+        "type": "debug",
+        "z": "89d7b498.8148d8",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 700,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "cdadc96b.153778",
+        "type": "function",
+        "z": "dfde19ff.b06078",
+        "name": "Salva Payload",
+        "func": "msg.bck1=msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 740,
+        "y": 660,
+        "wires": [
+            [
+                "6a448369.59ec1c",
+                "6fce0a32.7aefe4"
+            ]
+        ]
+    },
+    {
+        "id": "7085aa6e.8eb564",
+        "type": "function",
+        "z": "dfde19ff.b06078",
+        "name": "Recovery payload",
+        "func": "msg.payload = msg.bck1\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 340,
+        "wires": [
+            [
+                "cd73df45.332a5",
+                "f846cc6e.3fdf1"
+            ]
+        ]
+    },
+    {
+        "id": "3ea067fc.f18128",
+        "type": "catch",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 700,
+        "y": 60,
+        "wires": [
+            [
+                "26f2a2af.a3f6ce"
+            ]
+        ]
+    },
+    {
+        "id": "26f2a2af.a3f6ce",
+        "type": "http response",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "statusCode": "500",
+        "headers": {},
+        "x": 900,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "405b6c27.7c3a34",
+        "type": "switch",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "property": "payload[0].nrRecord",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 520,
+        "wires": [
+            [
+                "7085aa6e.8eb564"
+            ],
+            [
+                "4b10f388.d3057c"
+            ]
+        ]
+    },
+    {
+        "id": "4b10f388.d3057c",
+        "type": "link out",
+        "z": "dfde19ff.b06078",
+        "name": "Next Record",
+        "links": [
+            "69bf8371.e9380c"
+        ],
+        "x": 1115,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "69bf8371.e9380c",
+        "type": "link in",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "links": [
+            "4b10f388.d3057c"
+        ],
+        "x": 515,
+        "y": 520,
+        "wires": [
+            [
+                "19dc1eb3.4e09b1"
+            ]
+        ]
+    },
+    {
+        "id": "c280613d.f8f56",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 480,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6fce0a32.7aefe4",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 840,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "71a77512.bafb3c",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a0be3e87.4329e",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1330,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f846cc6e.3fdf1",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1050,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d74f3622.c00608",
+        "type": "debug",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1330,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "85fc130a.74aef",
+        "type": "inject",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 18 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 40,
+        "wires": [
+            [
+                "8d44e762.8d3138"
+            ]
+        ]
+    },
+    {
+        "id": "307756e7.7bf45a",
+        "type": "inject",
+        "z": "dfde19ff.b06078",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "10 18 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "8d44e762.8d3138"
+            ]
+        ]
+    }
+]
